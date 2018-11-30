@@ -23,19 +23,19 @@ var detectNetwork = function(cardNumber) {
     return 'American Express';
   } else if (firstDigit == 4 && (cardNumber.length == 13 || cardNumber.length == 16 || cardNumber.length == 19)) {
     return 'Visa';
-  } else if (51 <= firstTwoDigits <= 55 && cardNumber.length == 16) {
+  } else if (51 <= firstTwoDigits && firstTwoDigits <= 55 && cardNumber.length == 16) {
     return 'MasterCard';
-  } else if (cardNumber.length == 16 || cardNumber.length == 19) {
-    if (firstFourDigits == 6011) {
-      return 'Discover';
-    } else if (644 <= firstThreeDigits <= 649) {
-      return 'Discover';
-    } else if (firstTwoDigits == 65) {
-      return 'Discover';
-    }
-  } else if (12 <= cardNumber.length <= 19) {
+  } else if (12 <= cardNumber.length && cardNumber.length <= 19) {
     if (firstFourDigits == 5018 || firstFourDigits == 5020 || firstFourDigits == 5038 || firstFourDigits == 6304) {
       return 'Maestro';
+    } else if (cardNumber.length == 16 || cardNumber.length == 19) {
+      if (firstFourDigits == 6011) {
+        return 'Discover';
+      } else if (644 <= firstThreeDigits && firstThreeDigits <= 649) {
+        return 'Discover';
+      } else if (firstTwoDigits == 65) {
+        return 'Discover';
+      }
     }
   }
 };
