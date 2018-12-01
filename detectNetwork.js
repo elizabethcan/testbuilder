@@ -17,10 +17,15 @@ var detectNetwork = function(cardNumber) {
   var firstTwoDigits = cardNumber.slice(0, 2);
   var firstThreeDigits = cardNumber.slice(0,3);
   var firstFourDigits = cardNumber.slice(0,4);
+  var firstSixDigits = cardNumber.slice(0,6);
   if (cardNumber.length == 14 && (firstTwoDigits == 38 || firstTwoDigits == 39)) {
     return 'Diner\'s Club';
   } else if (cardNumber.length == 15 && (firstTwoDigits == 34 || firstTwoDigits == 37)) {
     return 'American Express';
+  } else if (firstFourDigits == 4903 || firstFourDigits == 4905 || firstFourDigits == 4911 || firstFourDigits == 4936 || firstFourDigits == 6333 || firstFourDigits == 6759 || firstSixDigits == 564182 || firstSixDigits == 633110) {
+    if (cardNumber.length == 16 || cardNumber.length == 18 || cardNumber.length == 19) {
+      return 'Switch'
+    }
   } else if (firstDigit == 4 && (cardNumber.length == 13 || cardNumber.length == 16 || cardNumber.length == 19)) {
     return 'Visa';
   } else if (51 <= firstTwoDigits && firstTwoDigits <= 55 && cardNumber.length == 16) {
@@ -35,9 +40,23 @@ var detectNetwork = function(cardNumber) {
         return 'Discover';
       } else if (firstTwoDigits == 65) {
         return 'Discover';
-      }
-    }
-  }
+      } else if (622126 <= firstSixDigits && firstSixDigits <= 622925) {
+        return 'China UnionPay';
+      } else if (624 <= firstThreeDigits && firstThreeDigits <= 626) {
+        return 'China UnionPay';
+      } else if (6282 <= firstFourDigits <= 6288) {
+        return 'China UnionPay';
+      } 
+    } else if (16 <= cardNumber.length && cardNumber.length <= 19) {
+      if (622126 <= firstSixDigits && firstSixDigits <= 622925) {
+        return 'China UnionPay';
+      } else if (624 <= firstThreeDigits && firstThreeDigits <= 626) {
+        return 'China UnionPay';
+      } else if (6282 <= firstFourDigits <= 6288) {
+        return 'China UnionPay';
+      } 
+    } 
+  } 
 };
 
 
